@@ -295,7 +295,7 @@ GROUP BY p, c.a;</codeblock>In
                                 format="dita">LETTING with an aggregate function inside</xref></dd>
                     </dlentry>
                 </dl>
-  <!--
+ 
                 <dl>
                     <dlentry>
   
@@ -318,7 +318,7 @@ GROUP BY p, c.a;</codeblock>In
                                 format="dita">Array of arrays</xref></dd>
                     </dlentry>
                 </dl>
--->
+
             </p>
             <p><b id="docs-internal-guid-44fa3035-b9c8-1706-a73e-b0f1c03d91da">1. GROUP BY on
                     leading keys</b></p>
@@ -1529,8 +1529,8 @@ HAVING MinimumThingsToSee > 180;</codeblock>Results:<codeblock>[
   }
 ]</codeblock>
                 
-            </p></section>
- <!--
+            
+ 
                 <b
                     id="docs-internal-guid-f14f9e5d-ba8d-b654-70f2-27f204564ae0">15. Aggregate on
                     non-array index field</b></p>
@@ -2514,7 +2514,7 @@ GROUP BY <varname>name</varname>;</codeblock></p>
 
 
         </section>
--->
+
         <section id="section_bq1_rjf_ycb">
             <title>Limitations</title>
             <p>The following are currently not supported and not pushed to the indexer:<ul
