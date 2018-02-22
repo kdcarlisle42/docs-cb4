@@ -295,7 +295,7 @@ GROUP BY p, c.a;</codeblock>In
                                 format="dita">LETTING with an aggregate function inside</xref></dd>
                     </dlentry>
                 </dl>
- 
+            </p> <!--
                 <dl>
                     <dlentry>
   
@@ -318,8 +318,7 @@ GROUP BY p, c.a;</codeblock>In
                                 format="dita">Array of arrays</xref></dd>
                     </dlentry>
                 </dl>
-
-            </p>
+            </p> -->
             <p><b id="docs-internal-guid-44fa3035-b9c8-1706-a73e-b0f1c03d91da">1. GROUP BY on
                     leading keys</b></p>
             <p>One of the common cases is to have both predicates and GROUP BY on leading keys of
@@ -1527,9 +1526,9 @@ HAVING MinimumThingsToSee > 180;</codeblock>Results:<codeblock>[
     "City": "San Francisco",
     "Landmark_Count": 797
   }
-]</codeblock>
+]</codeblock></p>
                 
-            
+      <!--      
  
                 <b
                     id="docs-internal-guid-f14f9e5d-ba8d-b654-70f2-27f204564ae0">15. Aggregate on
@@ -2512,7 +2511,7 @@ SELECT <varname>name</varname>, SUM(<varname>q</varname>)
 FROM <varname>t</varname> UNNEST <varname>val2 p</varname> UNNEST <varname>p q </varname>
 GROUP BY <varname>name</varname>;</codeblock></p>
 
-
+-->
         </section>
 
         <section id="section_bq1_rjf_ycb">
