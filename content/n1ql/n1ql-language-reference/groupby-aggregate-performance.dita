@@ -295,8 +295,10 @@ GROUP BY p, c.a;</codeblock>In
                                 format="dita">LETTING with an aggregate function inside</xref></dd>
                     </dlentry>
                 </dl>
+  <!--
                 <dl>
                     <dlentry>
+  
                         <dt>Aggregate on Array Index Scenarios:</dt>
                         <dd>15. <xref
                                 href="#groupby-aggregate-performance/docs-internal-guid-f14f9e5d-ba8d-b654-70f2-27f204564ae0"
@@ -316,6 +318,7 @@ GROUP BY p, c.a;</codeblock>In
                                 format="dita">Array of arrays</xref></dd>
                     </dlentry>
                 </dl>
+-->
             </p>
             <p><b id="docs-internal-guid-44fa3035-b9c8-1706-a73e-b0f1c03d91da">1. GROUP BY on
                     leading keys</b></p>
@@ -743,44 +746,17 @@ GROUP BY <b>UPPER</b>(sourceairport);</codeblock>Results:<codeblock>[
 ...</codeblock><b
                     id="docs-internal-guid-29f284c7-ba1c-b38b-97a7-1a2d9a3d998b">5. Heterogeneous
                     data types for GROUP BY key</b></p>
-            <p>When using a mix of data types for the GROUP BY key:<ul id="ul_ztr_5d2_ycb">
+            <p>When a field has a mix of data types for the GROUP BY key:<ul id="ul_ztr_5d2_ycb">
                     <li><codeph>NULLS</codeph> and <codeph>MISSING</codeph> are two separate
                         groups.</li>
-                </ul><b>Example
-                5</b>:<codeblock>CREATE INDEX idx5 ON `travel-sample`(geo.lat, vacancy, email) 
-WHERE type = "hotel";
-
-SELECT MAX(ROUND(geo.lat)) AS Max_Lattitude, MAX(vacancy) AS Max_Vacancy, MIN(email) AS Min_Email
-FROM `travel-sample`
-WHERE geo.lat IS NOT MISSING
-AND type = "hotel"
-GROUP BY ROUND(geo.lat), vacancy, SUBSTR(email,0,1)
-ORDER BY Min_Email;</codeblock>Results:<codeblock>[
-  {
-    "Max_Lattitude": 36,
-    "Max_Vacancy": false,
-    "Min_Email": null
-  },
-  {
-    "Max_Lattitude": 40,
-    "Max_Vacancy": true,
-    "Min_Email": null
-  },
-  {
-    "Max_Lattitude": 34,
-    "Max_Vacancy": true,
-    "Min_Email": "Bed@TopangaCanyonInn.com"
-  },
-  {
-    "Max_Lattitude": 48,
-    "Max_Vacancy": false,
-    "Min_Email": "BourronILA@ila-chateau.com"
-  },
-...</codeblock>To
-                see a separate grouping of <codeph>MISSING</codeph>, we need to <codeph>GROUP
-                    BY</codeph> a field we know exists in one document but not in another document
-                while both documents have another field in common. For example, create 2 such
+                </ul><b>Example 5</b>:</p>
+            <p>To see a separate grouping of <codeph>MISSING</codeph> and <codeph>NULL</codeph>, we
+                need to <codeph>GROUP BY</codeph> a field we know exists in one document but not in
+                another document while both documents have another field in common. For example,
+                create 3 such
                 documents:<codeblock>INSERT INTO `travel-sample` VALUES("01",{"<b>type</b>":1, "email":"abc","<b>xx</b>":<b>3</b>});
+
+INSERT INTO `travel-sample` VALUES("01",{"<b>type</b>":1, "email":"abc","<b>xx</b>":<b>null</b>});
 
 INSERT INTO `travel-sample` VALUES("02",{"<b>type</b>":1, "email":"abcd"});</codeblock>Then
                 run the following
@@ -792,6 +768,11 @@ GROUP BY type, <b>xx</b>;</codeblock>Results:<codeblock>[
     "Min_Email": "abc",
     "<b>type": 1</b>,
     "<b>xx": 3</b>
+  },
+  {
+    "Min_Email": "abc",
+    "<b>type": 1</b>,
+    "<b>xx": null</b>
   },
   {
     "Min_Email": "abcd",
@@ -836,7 +817,7 @@ GROUP BY SUBSTR(META().id,0,9);</codeblock>Results:<codeblock>[
                     id="docs-internal-guid-67306400-ba24-c55f-4713-86943530e62c">7. LIMIT with GROUP
                     BY on leading keys</b></p>
             <p>To use Aggregate Pushdown when there is a LIMIT clause and a GROUP BY clause on one
-                or more leading keys, use the following syntax of the index and query
+                or more leading keys, use the following example of the index and query
                     statement:<codeblock>CREATE INDEX <varname>idx_expr</varname> ON <varname>named_keyspace_ref</varname> (<varname>k0, k1</varname>);     
 
 SELECT <varname>k0</varname>, COUNT(<varname>k1</varname>) 
@@ -935,7 +916,7 @@ GROUP BY <b>city</b>
                     id="docs-internal-guid-82a268f5-ba2b-e5a4-7785-827a5d72d1d1">8. OFFSET with
                     GROUP BY on leading keys</b></p>
             <p>To use Aggregate Pushdown when there is an OFFSET clause and a GROUP BY clause on one
-                or more leading keys, use the following syntax of the index and query
+                or more leading keys, use the following example of the index and query
                     statement.<codeblock>CREATE INDEX <varname>idx_expr</varname> ON <varname>named_keyspace_ref</varname> (<varname>k0</varname>, <varname>k1</varname>);     
 
 SELECT <varname>k0</varname>, COUNT(k1) 
@@ -1036,7 +1017,7 @@ GROUP BY <b>city</b>
                     without GROUP BY key</b></p>
             <p>This is a case of aggregation over a range without groups. If the index can be used
                 for computing the aggregate, the indexer will return a single aggregate value. To
-                use Aggregate Pushdown, use the following syntax of index and
+                use Aggregate Pushdown, use the following example of index and
                     queries:<codeblock>CREATE INDEX <varname>idx_expr</varname> ON <varname>named_keyspace_ref</varname> (<varname>a, b, c</varname>);
 
 Q1: SELECT <varname>Aggregate_Function</varname>(<varname>c</varname>) 
@@ -1546,7 +1527,9 @@ HAVING MinimumThingsToSee > 180;</codeblock>Results:<codeblock>[
     "City": "San Francisco",
     "Landmark_Count": 797
   }
-]</codeblock><b
+]</codeblock>
+ <!--
+                <b
                     id="docs-internal-guid-f14f9e5d-ba8d-b654-70f2-27f204564ae0">15. Aggregate on
                     non-array index field</b></p>
             <p>For cases where your query involves arrays, consider the aggregates on array and
@@ -3038,6 +3021,8 @@ GROUP BY type;</codeblock>In
                             </row>
                         </tbody>
                     </tgroup>
-                </table></p></section>
+                </table></p>
+          --></p>      
+                </section>
     </body>
 </topic>
