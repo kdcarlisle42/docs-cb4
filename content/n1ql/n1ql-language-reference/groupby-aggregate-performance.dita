@@ -1528,6 +1528,8 @@ HAVING MinimumThingsToSee > 180;</codeblock>Results:<codeblock>[
     "Landmark_Count": 797
   }
 ]</codeblock>
+                
+            </p></section></body></topic>
  <!--
                 <b
                     id="docs-internal-guid-f14f9e5d-ba8d-b654-70f2-27f204564ae0">15. Aggregate on
@@ -3021,8 +3023,8 @@ GROUP BY type;</codeblock>In
                             </row>
                         </tbody>
                     </tgroup>
-                </table></p>
-          --></p>      
+                </table></p>     
                 </section>
     </body>
 </topic>
+-->
