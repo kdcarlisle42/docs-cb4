@@ -1529,7 +1529,7 @@ HAVING MinimumThingsToSee > 180;</codeblock>Results:<codeblock>[
   }
 ]</codeblock>
                 
-            </p>
+            </p></section>
  <!--
                 <b
                     id="docs-internal-guid-f14f9e5d-ba8d-b654-70f2-27f204564ae0">15. Aggregate on
@@ -2512,8 +2512,9 @@ SELECT <varname>name</varname>, SUM(<varname>q</varname>)
 FROM <varname>t</varname> UNNEST <varname>val2 p</varname> UNNEST <varname>p q </varname>
 GROUP BY <varname>name</varname>;</codeblock></p>
 
--->
+
         </section>
+-->
         <section id="section_bq1_rjf_ycb">
             <title>Limitations</title>
             <p>The following are currently not supported and not pushed to the indexer:<ul
